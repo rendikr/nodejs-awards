@@ -1,0 +1,50 @@
+{
+  "name": "memberid-recruitment-test",
+  "version": "1.0.0",
+  "description": "Recruitment Test for Member.ID by Rendi K.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app/app.js",
+    "sqlz": "node_modules/sequelize-cli/lib/sequelize",
+    "watch": "nodemon app/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/rendikr/nodejs-awards.git"
+  },
+  "author": "Rendi K.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rendikr/nodejs-awards/issues"
+  },
+  "homepage": "https://github.com/rendikr/nodejs-awards#readme",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "@hapi/joi-date": "^2.0.1",
+    "axios": "^0.27.2",
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "express-bearer-token": "^2.4.0",
+    "generate-api-key": "^1.0.0",
+    "hbs": "^4.2.0",
+    "helmet": "^5.0.2",
+    "http-status": "^1.5.0",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.2",
+    "pg": "^8.7.3",
+    "sequelize": "^6.19.0",
+    "sequelize-cli": "^6.4.1",
+    "sequelize-paginate": "^1.1.6",
+    "slug": "^5.3.0",
+    "sync-request": "^6.1.0",
+    "uniqid": "^5.0.3",
+    "winston": "^3.7.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
