@@ -5,14 +5,25 @@ let helmet = require('helmet');
 let path = require('path');
 let bearerToken = require('express-bearer-token');
 const db = require('../models');
+const hbs = require('hbs')
 
-let routes = loadRoute('/routes');
+// Define paths for Express config
+const assetsPath = path.join(__dirname, '../templates/assets')
+const viewsPath = path.join(__dirname, '../templates/views')
+const partialsPath = path.join(__dirname, '../templates/partials')
+
+// let routes = loadRoute('/routes');
 
 /**
  * Express instance
  * @public
  */
 let app = express();
+
+app.set('view engine', 'hbs')
+app.set('views', viewsPath)
+hbs.registerPartials(partialsPath)
+app.use(express.static(assetsPath))
 
 app.use(
     express.json({
@@ -40,6 +51,13 @@ app.options('*', cors());
 
 db.sequelize.sync();
 
-app.use(routes);
+// app.use(routes);
+
+app.get('', (req, res) => {
+    res.render('index', {
+        title: 'Awards',
+        author: 'Rendi K.'
+    })
+})
 
 module.exports = app;

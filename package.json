@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app/app.js",
     "sqlz": "node_modules/sequelize-cli/lib/sequelize",
-    "watch": "nodemon app/app.js",
+    "watch": "nodemon app/app.js -e js,hbs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
