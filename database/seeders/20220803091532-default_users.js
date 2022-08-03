@@ -14,8 +14,8 @@ module.exports = {
           is_verified: true,
           is_admin: true,
           is_deleted: false,
-          created_at: new Date(),
-          updated_at: new Date(),
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           name: 'Member',
@@ -25,8 +25,8 @@ module.exports = {
           is_verified: true,
           is_admin: false,
           is_deleted: false,
-          created_at: new Date(),
-          updated_at: new Date(),
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
       ],
       {}
