@@ -121,4 +121,19 @@ app.post('/sign-in', async (req, res) => {
     return response.responseJSON(req, res, httpStatus.UNAUTHORIZED, false, 'Incorrect email and/or password. Please try again.');
 })
 
+app.get('/about', (req, res) => {
+    res.render('about', {
+        title: 'Tentang Saya',
+        author: 'Rendi K.'
+    })
+})
+
+app.get('*', (req, res) => {
+    res.render('404', {
+        title: '404',
+        errorMessage: 'Page not found',
+        author: 'Rendi K.'
+    })
+})
+
 module.exports = app;
