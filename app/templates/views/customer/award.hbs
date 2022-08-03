@@ -15,7 +15,43 @@
 	  <br>
 
       <div class="row">
+		<div class="col-sm-12" style="margin-bottom: 10px;">
+			<h5>Filter</h5>
+			<hr>
+			<form>
+				<div class="col-sm-12 mb-2">
+					<label for="email" class="col-sm-4">Awards Type</label>
+					<br>
+					<input type="checkbox" id="vouchers" name="vouchers" value="vouchers">
+					<label for="vouchers"> Vouchers</label><br>
+					<input type="checkbox" id="products" name="products" value="products">
+					<label for="products"> Products</label><br>
+					<input type="checkbox" id="giftcard" name="giftcard" value="giftcard">
+					<label for="giftcard"> Gift Card</label><br>
+				</div>
+
+				<div class="col-sm-12 mb-2">
+					<label for="point_start" class="col-sm-4">Point Range Start</label>
+					<input type="number" placeholder="Point Start" name="point_start" id="point_start" value="{{filter.point_start}}"/>
+				</div>
+
+				<div class="col-sm-12 mb-2">
+					<label for="point_end" class="col-sm-4">Point Range End</label>
+					<input type="number" placeholder="Point End" name="point_end" id="point_end" value="{{filter.point_end}}"/>
+				</div>
+
+				<div class="col-sm-12">
+					<input type="hidden" id="action" value="awardFilter"/>
+					<button type="submit" class="btn btn-primary btn-sm">Filter</button>
+				</div>
+			</form>
+			<p id="message-3"></p>
+		</div>
+
         <div class="col-sm-12">
+			<h5>Data</h5>
+			<hr>
+			{{#if data.length}}
 			{{#each data}}
 			<div class="card" style="width: 18rem; margin-bottom: 10px;">
 				<img class="card-img-top" src="{{image}}" alt="Award Image">
@@ -37,6 +73,9 @@
 				<a href="{{next_page}}" class="btn btn-sm btn-info">Next Page</a>
 				{{/if}}
 			</div>
+			{{else}}
+			<p>No Awards Found.</p>
+			{{/if}}
 
 			<p id="message-1"></p>
 			<p id="message-2"></p>

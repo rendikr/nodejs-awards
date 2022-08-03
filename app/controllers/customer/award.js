@@ -46,21 +46,48 @@ exports.all = async (req, res) => {
             condition[Sequelize.Op.or] = conditionOr;
         }
 
-        if (req.query.point_start && req.query.point_end) {
-            var start = parseInt(req.query.start_date);
-            var end = parseInt(req.query.end_date);
+        if (req.query.type) {
+            var conditionOr = [];
 
-            condition['point'] = {
-                $between: [start, end],
-            };
-        } else if (req.query.point_start) {
-            var start = parseInt(req.query.start_date);
+            const typeFiltered = decodeURIComponent(req.query.type);
+            if (typeFiltered.includes(',')) {
+                typeInput = [];
+                const typeSplit = typeFiltered.split(',');
+                typeSplit.forEach(ts => {
+                    typeInput.push(`'${ts}'`)
+                });
 
-            condition['point'] = { $gte: start };
-        } else if (req.query.point_end) {
-            var end = parseInt(req.query.end_date);
+                conditionOr.push({
+                    'type': Sequelize.literal('"Award"."type" in ('+typeInput+')')
+                });
+                condition[Sequelize.Op.or] = conditionOr;
+            } else {
+                conditionOr.push({
+                    'type': Sequelize.literal('"Award"."type" = \''+typeFiltered+'\'')
+                });
+                condition[Sequelize.Op.or] = conditionOr;
+            }
+        }
 
-            condition['point'] = { $lte: end };
+        if (req.query.point_start && !isNaN(req.query.point_start) && req.query.point_end && !isNaN(req.query.point_end)) {
+            var start = parseInt(req.query.point_start);
+            var end = parseInt(req.query.point_end);
+
+            if (start > 0 && end > 0 && start < end)  {
+                condition['point'] = {
+                    $between: [start, end],
+                };
+            }
+        } else if (req.query.point_start && !isNaN(req.query.point_start)) {
+            var start = parseInt(req.query.point_start);
+
+            if (start > 0)
+                condition['point'] = { $gte: start };
+        } else if (req.query.point_end && !isNaN(req.query.point_end)) {
+            var end = parseInt(req.query.point_end);
+
+            if (end > 0)
+                condition['point'] = { $lte: end };
         }
 
         const options = {
@@ -77,11 +104,6 @@ exports.all = async (req, res) => {
         );
 
         const pages = Math.ceil(total / limit);
-
-        console.log(`[ +++ total] : ${total}`);
-        console.log(`[ +++ limit] : ${limit}`);
-        console.log(`[ +++ pages] : ${pages}`);
-        console.log(`[ +++ page] : ${page}`);
 
         let next_page = '#';
         let prev_page = '#';
@@ -111,6 +133,7 @@ exports.all = async (req, res) => {
             prev_page,
             has_next_page,
             has_prev_page,
+            filter: req.query
         });
     } catch (err) {
         console.error(err);
