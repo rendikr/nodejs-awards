@@ -7,17 +7,6 @@ module.exports = {
       'users',
       [
         {
-          name: 'Superadmin',
-          email: 'admin@member.id',
-          password: bcrypt.hashSync('secret', 10),
-          is_active: true,
-          is_verified: true,
-          is_admin: true,
-          is_deleted: false,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
           name: 'Member',
           email: 'member@member.id',
           password: bcrypt.hashSync('secret', 10),

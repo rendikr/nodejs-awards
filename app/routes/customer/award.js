@@ -8,7 +8,6 @@ let router = express.Router();
 let controller = loadController('customer/award');
 
 router.get('', controller.all);
-router.get('/detail/:id', controller.single);
 
 router.use( apiNotFound );
 

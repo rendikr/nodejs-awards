@@ -39,7 +39,7 @@ exports.all = async (req, res) => {
             var conditionOr = [];
             conditionOr.push({
                 name: Sequelize.literal(
-                    'lower("code") like lower(\'%' + req.query.keyword + "%')"
+                    'lower("name") like lower(\'%' + req.query.keyword + "%')"
                 ),
             });
 
@@ -146,7 +146,3 @@ exports.all = async (req, res) => {
         );
     }
 };
-exports.single = async (req, res) => {};
-exports.add = async (req, res) => {};
-exports.update = async (req, res) => {};
-exports.delete = async (req, res) => {};
